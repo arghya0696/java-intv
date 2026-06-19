@@ -53,7 +53,7 @@ public class AstroidCollision {
 
 /*
 * Keep State Local: By moving the exploded boolean inside the for loop, we guarantee a fresh slate for every new asteroid being evaluated.
-
+* exploded keep track if current element can be pushed or not , thats why we rest every time in outer loop
 * Simplified Conditionals: Instead of a separate helper method, checking st.peek() > 0 && arr[j] < 0 is the definitive and only way a collision happens.
 * If they are [-2, -2], they are both going left and will never touch. If they are [2, 2], they are both going right at the same speed and will never touch.
 * */
