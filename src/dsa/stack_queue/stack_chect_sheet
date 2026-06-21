@@ -1,0 +1,16 @@
+* Here is a quick reference note you can save for the future whenever you are tackling array-collapsing or string-reduction problems using Stacks.
+
+### **The Stack Problem Cheat Sheet**
+
+> **The Golden Rule:** The entire superpower of a Stack is that it perfectly preserves the *immediate past*. Trust the stack to handle history, and avoid using global variables to track local events.
+
+* **Adjacency vs. Global Frequency:** If a problem asks you to remove or compare **adjacent** elements, **do not use a HashMap**. HashMaps track global, overarching data. The Stack itself is your tracker. If you need to count streaks (like in the *Remove K Identical* problem), store the count *inside* the stack right next to the character (e.g., `Stack<Holder>`).
+* **Keep Flags Local to the Loop:** When iterating through an array where items might get destroyed or skipped (like in *Asteroid Collision*), declare your status flags (like `boolean exploded = false;`) **inside** the `for` loop. This guarantees a clean slate for every new element. Declaring flags outside the loop causes past iterations to corrupt future ones.
+* **Let the Stack Do the "Glueing":**
+When middle elements are destroyed (like an asteroid exploding or characters being removed), you do not need to manually figure out how the remaining left and right pieces connect. Because you are using a stack, the new "right" piece will automatically be compared to the new "top" of the stack (the old "left" piece).
+
+**Quick Pattern Recognition:**
+
+* *Are things moving towards each other and destroying each other?* -> **Stack**
+* *Am I deleting duplicates and the remaining halves snap together?* -> **Stack**
+* *Do I need to know how many times a character appeared in a row right before the current one?* -> **Stack storing an Object/Pair `(value, count)**`
