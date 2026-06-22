@@ -23,7 +23,6 @@ public class StockSpan {
 
 class StockSpanner {
 
-    List<Integer> list = new ArrayList<>();
     Stack<Holder> stack = new Stack<>();
 
     int currentIndex = 0;
