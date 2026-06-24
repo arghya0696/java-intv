@@ -42,3 +42,32 @@ public class SlidingWindowMaximum {
         return ans;
     }
 }
+
+/*
+* Here is a concise description of your solution for the Sliding Window Maximum problem.
+
+### Approach: Monotonic Deque (Double-Ended Queue)
+
+Your solution efficiently uses a Deque to store **indices** (not the actual values) in a way that keeps the maximum element of the current window always at the very front. It maintains a strictly decreasing Monotonic Deque.
+
+**1. Evicting Out-of-Bounds Elements**
+
+* As the window slides to the right, the element at the front of the Deque might no longer be part of the current window of size `k`.
+* You check this using `dq.peekFirst() <= (i - k)`. If the index at the front is too old, you remove it using `dq.removeFirst()`.
+
+**2. Maintaining the Monotonic Property (The Core Logic)**
+
+* Before adding the current element `arr[i]` to the Deque, you compare it with the elements at the back of the Deque.
+* If the current element is greater than or equal to `arr[dq.peekLast()]`, you `removeLast()`.
+* *Why?* Because a smaller element that appears *before* a larger element will **never** be the maximum for any current or future window. It is completely overshadowed by the new, larger, and more recent element.
+
+**3. Adding and Recording**
+
+* After clearing out the useless smaller elements, you always add the current index to the back: `dq.addLast(i)`.
+* Finally, you check `if (i >= k - 1)`. This ensures you only start recording answers once the first full window of size `k` is actually formed. Because of your cleanup steps, the absolute maximum for the current window is guaranteed to be sitting right at the front: `arr[dq.peekFirst()]`.
+
+**Complexity:**
+
+* **Time:** $O(N)$ - Even with the inner `while` loop, every index from the array is added to the Deque exactly once and removed at most once. The amortized time is strictly linear.
+* **Space:** $O(K)$ - The Deque will store at most `k` indices at any given time (if the elements are strictly decreasing). The answer array requires $O(N - K + 1)$ space, but auxiliary space is just $O(K)$.
+* */
