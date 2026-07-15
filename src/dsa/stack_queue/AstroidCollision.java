@@ -7,7 +7,7 @@ public class AstroidCollision {
 
     public static void main(String[] args) {
 
-        int[] arr = {5,10,-5};
+        int[] arr = {3,5,-6,2,-1,4};
 
         int[] ans = astroidCollision(arr);
 
